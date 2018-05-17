@@ -7,6 +7,7 @@
 #include <memory>
 
 #include "Grafo.h"
+#include "Algoritmos.h"
 #include "algoritmos/Dantzig.cpp"
 
 using namespace std;

@@ -1,5 +1,5 @@
 CXXFLAGS = -g -Wall -Wextra -std=c++11
-SOURCES = Grafo.cpp
+SOURCES = Grafo.cpp Algoritmos.cpp
 OBJS = $(SOURCES:.cpp=.o)
 
 TARGET = main

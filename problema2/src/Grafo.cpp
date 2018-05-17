@@ -4,19 +4,19 @@ Grafo::Grafo() : n(0), m(0){
 
 }
 
-int Grafo::getCantVertices(){
+int Grafo::getCantVertices() const {
 	return n;
 }
 
-int Grafo::getCantAristas(){
+int Grafo::getCantAristas() const {
 	return m;
 }
 
-int Grafo::getCostoVertice(int i){
+int Grafo::getCostoVertice(int i) const {
 	return costoVertices[i];
 }
 
-int Grafo::getCostoArista(int a, int b){
+int Grafo::getCostoArista(int a, int b) const {
 	return costoAristas[a][b];
 }
 

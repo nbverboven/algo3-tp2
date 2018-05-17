@@ -25,10 +25,10 @@ public:
 	/**
 	 * Getters & Setters
 	 */
-	int getCantVertices();
-	int getCantAristas();
-	int getCostoVertice(int i);
-	int getCostoArista(int a, int b);
+	int getCantVertices() const;
+	int getCantAristas() const;
+	int getCostoVertice(int i) const;
+	int getCostoArista(int a, int b) const;
 	vector< tuple<int,int> > getAristas();
 
 
