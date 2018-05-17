@@ -4,6 +4,7 @@
 #include <tuple>
 #include <string>
 #include <chrono>
+#include <memory>
 
 #include "Grafo.h"
 #include "algoritmos/Dantzig.cpp"
@@ -29,9 +30,9 @@ void processOptions(int argc, char* argv[]){
             {"help", 0, nullptr, 'h'}
     };
 
-    Grafo _grafo = Grafo::getInstanceFromInput();
+    std::unique_ptr<Grafo> _grafo(Grafo::getInstanceFromInput());
 
-    _grafo.print();
+    _grafo->print();
 
     string experimento;
 
