@@ -32,7 +32,6 @@ public:
 	vector< tuple<int,int> > getAristas();
 	vector< vector< int > > getMatrizAdyacencia() const;
 
-
 	/**
 	 * LLena el vector de tuplas pasado como parámetro desde el standart input,
 	 * con los valores correspondientes según el enunciado.
