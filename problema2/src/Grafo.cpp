@@ -24,6 +24,10 @@ vector< tuple<int,int> > Grafo::getAristas(){
 	return aristas;
 }
 
+vector< vector< int > > Grafo::getMatrizAdyacencia() const{
+    return costoAristas;
+}
+
 
 Grafo* Grafo::getInstanceFromInput(){
 	Grafo *ret = new Grafo();
