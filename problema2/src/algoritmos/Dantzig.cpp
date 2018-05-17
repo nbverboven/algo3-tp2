@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-#include "../Grafo.hpp"
+#include "../Grafo.h"
 
 using namespace std;
 

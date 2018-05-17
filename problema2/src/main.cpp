@@ -5,7 +5,7 @@
 #include <string>
 #include <chrono>
 
-#include "Grafo.hpp"
+#include "Grafo.h"
 #include "algoritmos/Dantzig.cpp"
 
 using namespace std;
