@@ -38,11 +38,15 @@ Grafo* Grafo::getInstanceFromInput(){
 	ret->costoVertices.resize(ret->n+1);
 	ret->aristas.resize(ret->m);
 
+	int int_max = std::numeric_limits<int>::max();
 	unsigned int i;
-	for(i=0; i <= ret->n; i++)
-		ret->costoAristas[i].resize(ret->n+1);
+	for(i=0; i <= ret->n; i++){
+		//Inicializo la matriz con el maximo valor representable (infinito)
+		ret->costoAristas[i].resize(ret->n+1, int_max);
+		//No existen las aristas que salgan y entren al mismo nodo
+		ret->costoAristas[i][i] = 0;
+	}
 	
-
 	//lleno los vertices
 	for(i=0; i < ret->n; i++){
 		cin >> c;

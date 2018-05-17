@@ -4,13 +4,13 @@
 #include <iostream>
 #include <vector>
 
-#include "../Grafo.h"
+#include "../Algoritmos.h"
 
 using namespace std;
 
-vector< vector< int > > AlgoritmoDantzig(Grafo grafo){
+void Dantzig(std::vector<std::vector<int>> &L, const Grafo &grafo){
 
-    vector< vector< int > > L = grafo.getMatrizAdyacencia();
+    L = grafo.getMatrizAdyacencia();
 
     int n = grafo.getCantVertices();
 
@@ -25,7 +25,7 @@ vector< vector< int > > AlgoritmoDantzig(Grafo grafo){
         //veo que la diagonal no sea negativa
         for(int i=1; i<=k; i++){
             if( min( L[k+1][i], L[i][k+1]) < 0 )
-                return L; //paro aca, hay circuitos de longitud negativa
+                return; //paro aca, hay circuitos de longitud negativa
         }
 
         for(int i=1; i <= k; i++){
