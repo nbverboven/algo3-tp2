@@ -25,32 +25,32 @@ vector< tuple<int,int> > Grafo::getAristas(){
 }
 
 
-Grafo& Grafo::getInstanceFromInput(){
-	Grafo ret;
+Grafo* Grafo::getInstanceFromInput(){
+	Grafo *ret = new Grafo();
 	int a, b, c;
-	cin >> ret.n >> ret.m;
+	cin >> ret->n >> ret->m;
 	
-	ret.costoAristas.resize(ret.n+1);
-	ret.costoVertices.resize(ret.n+1);
-	ret.aristas.resize(ret.m);
+	ret->costoAristas.resize(ret->n+1);
+	ret->costoVertices.resize(ret->n+1);
+	ret->aristas.resize(ret->m);
 
 	unsigned int i;
-	for(i=0; i <= ret.n; i++)
-		ret.costoAristas[i].resize(ret.n+1);
+	for(i=0; i <= ret->n; i++)
+		ret->costoAristas[i].resize(ret->n+1);
 	
 
 	//lleno los vertices
-	for(i=0; i < ret.n; i++){
+	for(i=0; i < ret->n; i++){
 		cin >> c;
-		ret.costoVertices[i] = c;
+		ret->costoVertices[i] = c;
 	}
 	
 	//lleno las aristas
-	for(i=0; i < ret.m; i++){
+	for(i=0; i < ret->m; i++){
 		cin >> a >> b >> c;
-		ret.costoAristas[a][b] = c;
-		ret.costoAristas[b][a] = c;
-		ret.aristas[i] = make_tuple(a,b);
+		ret->costoAristas[a][b] = c;
+		ret->costoAristas[b][a] = c;
+		ret->aristas[i] = make_tuple(a,b);
 	}
 
 	return ret;

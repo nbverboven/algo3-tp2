@@ -10,7 +10,6 @@
 #include <algorithm>
 #include <cassert>
 #include "../../problema1/src/Edge.h"
-#include "../../problema1/src/DisjointSet.h"
 
 using namespace std;
 
@@ -21,7 +20,7 @@ public:
 	 * Constructor.
 	 */
 	Grafo();
-	Grafo(std::vector<Edge> v);
+	// Grafo(std::vector<Edge> v);
 
 	/**
 	 * Getters & Setters
@@ -37,23 +36,11 @@ public:
 	 * LLena el vector de tuplas pasado como parámetro desde el standart input,
 	 * con los valores correspondientes según el enunciado.
 	 */
-	static Grafo& getInstanceFromInput();
+	static Grafo* getInstanceFromInput();
 
 	void print();
 
 	friend ostream& operator<<(std::ostream &output, const Grafo &grafo);
-
-	/**
-	 * Algoritmos para calcular el camino mínimo desde todos los
-	 * vértices hacia todos los vértices.
-	 * Devuelven el resultado modificando la matriz pasada por parámetro
-	 */
-	void Dijkstra(std::vector<std::vector<int>> &v) const;
-	void DijkstraPQ(std::vector<std::vector<int>> &v) const;
-	void BellmanFord(std::vector<std::vector<int>> &v) const;
-	void AEstrella(std::vector<std::vector<int>> &v) const;
-	void FloydWarshall(std::vector<std::vector<int>> &v) const;
-	void Dantzig(std::vector<std::vector<int>> &v) const;
 
 private:
 
