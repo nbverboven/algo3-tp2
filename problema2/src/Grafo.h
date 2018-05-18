@@ -6,7 +6,7 @@
 #include <vector>
 #include <limits>
 #include <utility>
-#include <forward_list>
+#include <list>
 #include <algorithm>
 #include <cassert>
 #include "../../problema1/src/Edge.h"
@@ -20,7 +20,7 @@ public:
 	 * Constructor.
 	 */
 	Grafo();
-	// Grafo(std::vector<Edge> v);
+	Grafo(const std::vector<Edge> &edges, int cant_vertices);
 
 	/**
 	 * Getters & Setters

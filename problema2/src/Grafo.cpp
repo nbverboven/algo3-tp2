@@ -4,6 +4,22 @@ Grafo::Grafo() : n(0), m(0){
 
 }
 
+Grafo::Grafo(const std::vector<Edge> &edges, int cant_vertices) {
+	this->n = cant_vertices;
+	this->m = edges.size();
+
+	this->costoAristas.resize(this->n);
+
+	for (unsigned int i = 0; i < this->n; ++i) {
+		this->costoAristas[i].resize(n, std::numeric_limits<int>::max());
+		this->costoAristas[i][i] = 0;
+	}
+
+	for (unsigned int i = 0; i < this->m; ++i) {
+		this->costoAristas[edges[i].getA()][edges[i].getB()] = edges[i].getCost();
+	}
+}
+
 int Grafo::getCantVertices() const {
 	return n;
 }
