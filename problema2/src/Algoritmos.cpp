@@ -5,7 +5,6 @@ void DijkstraAux(std::vector<int> &min_path_len, int vertex, const Grafo &grafo)
 	assert(vertex >= 0);
 	assert(vertex < n);
 
-	// std::vector<int> min_path_len(n);
 	std::list<int> not_added;
 
 	for (int i = 0; i < n; ++i) {
@@ -54,6 +53,71 @@ void Dijkstra(std::vector<std::vector<int>> &v, const Grafo &grafo) {
 
 	for (int i = 0; i < n; ++i) {
 		DijkstraAux(v[i], i, grafo);
+	}
+}
+
+
+void DijkstraPQAux(std::vector<int> &min_path_len, int vertex, const Grafo &grafo) {
+	int n = grafo.getCantVertices();
+	assert(vertex >= 0);
+	assert(vertex < n);
+
+	std::vector<int> not_added;
+
+	for (int i = 0; i < n; ++i) {
+		min_path_len[i] = grafo.getCostoArista(vertex, i);
+
+		if (i != vertex) {
+			not_added.push_back(i);
+		}
+	}
+
+	while (!not_added.empty()) {
+		// Busco la longitud del camino mínimo entre el
+		// vértice original y uno que no haya sido agregado
+		// a la solución
+		int minimum = std::numeric_limits<int>::max();
+		int minimum_index = 0;
+
+		for (unsigned int i = 0; i < not_added.size(); ++i) {
+			int node = not_added[i];
+
+			if (min_path_len[node] <= minimum) {
+				minimum = min_path_len[node];
+				minimum_index = i;
+			}
+		}
+
+		int vertex_to_add = not_added[minimum_index];
+
+		// Elimino el elemento que ya elegí para agregar a
+		// la solución
+		int aux = not_added[-1];
+		not_added[-1] = not_added[minimum_index];
+		not_added[minimum_index] = aux;
+		not_added.pop_back();
+
+		// Actualizo, si correspondiese, la longitud del 
+		// camino mínimo desde vertex hasta los sucesores
+		// del vértice que agrego
+		for (unsigned int i = 0; i < not_added.size(); ++i) {
+			int node = not_added[i];
+
+			if (grafo.getCostoArista(vertex_to_add, node) < std::numeric_limits<int>::max() &&
+				min_path_len[node] > minimum + grafo.getCostoArista(vertex_to_add, node)) {
+				min_path_len[node] = minimum + grafo.getCostoArista(vertex_to_add, node); 
+			}
+		}
+	}
+}
+
+
+void DijkstraPQ(std::vector<std::vector<int>> &v, const Grafo &grafo) {
+	int n = grafo.getCantVertices();
+	assert(n > 0);
+
+	for (int i = 0; i < n; ++i) {
+		DijkstraPQAux(v[i], i, grafo);
 	}
 }
 
