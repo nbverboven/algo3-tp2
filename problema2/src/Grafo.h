@@ -6,6 +6,7 @@
 #include <vector>
 #include <limits>
 #include <utility>
+#include <list>
 #include <algorithm>
 #include <cassert>
 #include "../../problema1/src/Edge.h"
