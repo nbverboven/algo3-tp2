@@ -1,6 +1,7 @@
 #include <vector>
 #include <limits>
 #include "Ruta.h"
+#include "Edge.h"
 
 #ifndef SHORTEST_PATH
 #define SHORTEST_PATH
@@ -30,6 +31,15 @@ protected:
     std::vector<std::vector<int>> armarGrafoEnNiveles(std::vector<Ruta>& rutas,
         std::vector<int> costos,
         int n);
+
+    /**
+     * Metodo auxiliar para armar el grafo en niveles como la lista de todas las aristas,
+     * necesario para implementar las dos versiones de Dijkstra.
+     */
+    std::vector<Edge> armarGrafoEnNivelesComoListaDeAristas(std::vector<Ruta>& rutas,
+        std::vector<int> costos,
+        int n);
+
 };
 
 #endif

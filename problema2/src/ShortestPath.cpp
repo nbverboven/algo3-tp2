@@ -40,12 +40,15 @@ std::vector<std::vector<int>> ShortestPath::armarGrafoEnNiveles(std::vector<Ruta
         }
     }
 
-    for(Ruta& r: rutas) {
+    for (Ruta& r: rutas) {
         int a_i = r.obtenerCiudadA();
         int b_i = r.obtenerCiudadB();
         int litros = r.obtenerLitros();
         for (int nivel = 0; nivel < 61; ++nivel) {
             if (nivel - litros > 0) {
+                // agrega el costo del viaje entre dos ciudades, para
+                // el caso en que la nafta alcance (se agrega en las dos
+                // posiciones de la matriz en esta representacion)
                 distancias[(a_i*61)+nivel][(b_i*61)+nivel-litros] = 0;
                 distancias[(b_i*61)+nivel][(a_i*61)+nivel-litros] = 0;
             }
@@ -53,4 +56,39 @@ std::vector<std::vector<int>> ShortestPath::armarGrafoEnNiveles(std::vector<Ruta
     }
 
     return distancias;
+}
+
+/**
+ * Metodo auxiliar para armar el grafo en niveles como la lista de todas las aristas,
+ * necesario para implementar las dos versiones de Dijkstra.
+ */
+std::vector<Edge> armarGrafoEnNivelesComoListaDeAristas(std::vector<Ruta>& rutas,
+    std::vector<int> costos,
+    int n) {
+
+    std::vector<Edge> aristas;
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < 60; ++j){
+            // agrega los costos de cargar nafta entre una ciudad de un nivel
+            // y la misma ciudad de un nivel mas arriba
+            aristas.push_back(Edge((i*61)+j, (i*61)+j+1), costos[i]);
+        }
+    }
+
+    for (Ruta& r: rutas) {
+        int a_i = r.obtenerCiudadA();
+        int b_i = r.obtenerCiudadB();
+        int litros = r.obtenerLitros();
+        for (int nivel = 0; nivel < 61; ++nivel) {
+            if (nivel - litros > 0) {
+                // agrega el costo del viaje entre dos ciudades, para
+                // el caso en que la nafta alcance
+                aristas.push_back(Edge((a_i*61)+nivel, (b_i*61)+nivel-litros, 0));
+            }
+        }
+    }
+
+
+    return aristas;
 }
