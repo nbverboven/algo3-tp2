@@ -62,7 +62,7 @@ std::vector<std::vector<int>> ShortestPath::armarGrafoEnNiveles(std::vector<Ruta
  * Metodo auxiliar para armar el grafo en niveles como la lista de todas las aristas,
  * necesario para implementar las dos versiones de Dijkstra.
  */
-std::vector<Edge> armarGrafoEnNivelesComoListaDeAristas(std::vector<Ruta>& rutas,
+std::vector<Edge> ShortestPath::armarGrafoEnNivelesComoListaDeAristas(std::vector<Ruta>& rutas,
     std::vector<int> costos,
     int n) {
 
@@ -72,7 +72,7 @@ std::vector<Edge> armarGrafoEnNivelesComoListaDeAristas(std::vector<Ruta>& rutas
         for (int j = 0; j < 60; ++j){
             // agrega los costos de cargar nafta entre una ciudad de un nivel
             // y la misma ciudad de un nivel mas arriba
-            aristas.push_back(Edge((i*61)+j, (i*61)+j+1), costos[i]);
+            aristas.push_back(Edge((i*61)+j, (i*61)+j+1, costos[i]));
         }
     }
 
