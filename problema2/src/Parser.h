@@ -39,7 +39,7 @@ public:
 private:
     int n_, m_;
     std::vector<int> costs_;
-    std::vector<Edge> rutas_;
+    std::vector<Ruta> rutas_;
 };
 
 #endif
