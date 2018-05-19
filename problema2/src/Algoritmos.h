@@ -1,7 +1,7 @@
 #ifndef ALGORITMOS_H
 #define ALGORITMOS_H
 
-#include "Grafo.h"
+#include "Mapa.h"
 
 /**
  * Algoritmos para calcular el camino mínimo desde todos los
