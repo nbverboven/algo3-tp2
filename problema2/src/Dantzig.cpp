@@ -23,20 +23,20 @@ void Dantzig::resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n)
     for (int k=1; k < n; ++k) {
         for (int i=1; i <= k; i++) {
             for (int j=1; j <= k; i++) {
-                L[i][k+1] = min( L[i][j], L[j][k+1]);
-                L[k+1][i] = min( L[k+1][j], L[j][i]);
+                L[i][k+1] = std::min(L[i][j], L[j][k+1]);
+                L[k+1][i] = std::min(L[k+1][j], L[j][i]);
             }
         }
 
         //veo que la diagonal no sea negativa
         for (int i=1; i<=k; ++i) {
-            if( min( L[k+1][i], L[i][k+1]) < 0)
+            if(std::min(L[k+1][i], L[i][k+1]) < 0)
                 return; //paro aca, hay circuitos de longitud negativa
         }
 
         for (int i=1; i <= k; ++i) {
             for (int j=1; j <= k; ++i) {
-                L[i][j] = min( L[i][j], L[i][k+1] + L[k+1][j]);
+                L[i][j] = std::min(L[i][j], L[i][k+1] + L[k+1][j]);
             }
         }
 
