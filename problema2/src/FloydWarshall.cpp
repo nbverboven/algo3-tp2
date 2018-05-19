@@ -19,7 +19,7 @@ FloydWarshall::~FloydWarshall() {
  * de camino minimo. Las clases que implementen esta interfaz
  * deben implementar este metodo.
  */
-void FloydWarshall::resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n) {
+std::vector<std::vector<int>> FloydWarshall::resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n) {
     std::vector<std::vector<int>> L = this->armarGrafoEnNiveles(rutas, costos, n);
 
     for (int k = 0; k < n; ++k) {
@@ -31,4 +31,5 @@ void FloydWarshall::resolver(std::vector<Ruta>& rutas, std::vector<int> costos, 
             }
         }
     }
+    return L;
 }

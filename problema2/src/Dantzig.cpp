@@ -17,7 +17,7 @@ Dantzig::~Dantzig() {
 /**
  * Metodo para resolver camino minimo usando Dantzig.
  */
-void Dantzig::resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n) {
+std::vector<std::vector<int>> Dantzig::resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n) {
     std::vector<std::vector<int>> L = this->armarGrafoEnNiveles(rutas, costos, n);
 
     for (int k=1; k < n; ++k) {
@@ -30,8 +30,9 @@ void Dantzig::resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n)
 
         //veo que la diagonal no sea negativa
         for (int i=1; i<=k; ++i) {
-            if(std::min(L[k+1][i], L[i][k+1]) < 0)
-                return; //paro aca, hay circuitos de longitud negativa
+            if (std::min(L[k+1][i], L[i][k+1]) < 0) {
+                throw "hay ciclos de longitud negativa"; //paro aca, hay circuitos de longitud negativa
+            }
         }
 
         for (int i=1; i <= k; ++i) {
@@ -41,6 +42,8 @@ void Dantzig::resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n)
         }
 
     }
+    return L;
+}
 
 /*
 para k desde 1 a n−1 hacer
@@ -60,4 +63,3 @@ para k desde 1 a n−1 hacer
 fin para
 retornar L
 */
-}
