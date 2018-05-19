@@ -1,4 +1,5 @@
 #include <vector>
+#include <limits>
 #include "Ruta.h"
 
 #ifndef SHORTEST_PATH
@@ -20,6 +21,16 @@ public:
      * deben implementar este metodo.
      */
     virtual void resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n)=0;
+
+protected:
+    /**
+     * Metodo auxiliar para armar el grafo en niveles en base a las rutas existentes
+     * y los costos de la nafta en cada ciudad. Modifica el vector recibido por
+     * parametro para armar ahí la matriz de distancias.
+     */
+    std::vector<std::vector<int>> armarGrafoEnNiveles(std::vector<Ruta>& rutas,
+        std::vector<int> costos,
+        int n);
 };
 
 #endif

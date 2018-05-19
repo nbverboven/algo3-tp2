@@ -1,0 +1,52 @@
+#include "ShortestPath.h"
+
+/**
+ * Constructor.
+ */
+ShortestPath::ShortestPath() {
+
+}
+
+/**
+ * Destructor.
+ */
+ShortestPath::~ShortestPath() {
+
+}
+
+/**
+ * Metodo auxiliar para armar el grafo en niveles en base a las rutas existentes
+ * y los costos de la nafta en cada ciudad. Modifica el vector recibido por
+ * parametro para armar ahí la matriz de distancias.
+ */
+std::vector<std::vector<int>> ShortestPath::armarGrafoEnNiveles(std::vector<Ruta>& rutas,
+    std::vector<int> costos,
+    int n) {
+
+    // es de n*61 porque hay 61 copias de cada ciudad,
+    // correspondientes a los 61 niveles
+    std::vector<std::vector<int>> distancias(n*61, std::vector<int>(n*61, std::numeric_limits<int>::infinity()));
+
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < 60; ++j){
+            // agrega los costos de cargar nafta entre una ciudad de un nivel
+            // y la misma ciudad de un nivel mas arriba
+            distancias[(i*61)+j][(i*61)+j+1] = costos[i];
+        }
+    }
+
+    for(Ruta& r: rutas) {
+        int a_i = r.obtenerCiudadA();
+        int b_i = r.obtenerCiudadB();
+        int litros = r.obtenerLitros();
+        for (int nivel = 0; nivel < 61; ++nivel) {
+            if (nivel - litros > 0) {
+                distancias[(a_i*61)+nivel][(b_i*61)+nivel-litros] = 0;
+                distancias[(b_i*61)+nivel][(a_i*61)+nivel-litros] = 0;
+            }
+        }
+    }
+
+    return distancias;
+}
