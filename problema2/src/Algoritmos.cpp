@@ -51,14 +51,14 @@ void DijkstraAux(std::vector<int> &min_path_len, int vertex, const Grafo &g) {
 		not_added[minimum_index] = not_added[not_added.size()-1];
 		not_added.pop_back();
 
-		// Actualizo, si correspondiese, la longitud del camino mínimo desde 
+		// Actualizo, si correspondiese, la longitud del camino mínimo desde
 		// vertex hasta los sucesores del vértice que agrego
 		for (std::tuple<int,int> &adj_node : adjacencyList[vertex_to_add]) {
 			int dir_path_len = get<1>(adj_node);
 			int alt_path_len = minimum + dir_path_len;
 
 			if (minimum != max_int && alt_path_len < min_path_len[get<0>(adj_node)]) {
-				min_path_len[get<0>(adj_node)] = alt_path_len; 
+				min_path_len[get<0>(adj_node)] = alt_path_len;
 			}
 		}
 	}
@@ -94,7 +94,7 @@ void DijkstraPQAux(std::vector<int> &min_path_len, int vertex, const Grafo &grap
 	// de la forma a -> [<b, costo>]
 	std::vector<std::tuple<int,int>> edges = graph.getAristas();
 	std::vector<std::vector<std::tuple<int, int>>> adjacencyList(graph.getCantVertices());
-	
+
 	for(int i = 0; i < graph.getCantAristas(); ++i) {
 		std::tuple<int, int> e = edges[i];
 
@@ -117,7 +117,7 @@ void DijkstraPQAux(std::vector<int> &min_path_len, int vertex, const Grafo &grap
 
 	// Convierto al vector de pares en un minHeap
 	// El élemento más prioritario será aquel cuyo camino desde
-	// vertex posea la menor longitud 
+	// vertex posea la menor longitud
 	std::make_heap(not_added.begin(), not_added.end(), compare_pairs);
 
 	while (!not_added.empty()) {
@@ -130,7 +130,7 @@ void DijkstraPQAux(std::vector<int> &min_path_len, int vertex, const Grafo &grap
 
 		int vertex_to_add = minimum.second;
 
-		// Actualizo, si correspondiese, la longitud del 
+		// Actualizo, si correspondiese, la longitud del
 		// camino mínimo desde vertex hasta los sucesores
 		// del vértice que agrego
 		for (std::pair<int,int> &node : not_added) {
@@ -138,12 +138,12 @@ void DijkstraPQAux(std::vector<int> &min_path_len, int vertex, const Grafo &grap
 			int alt_path_len = minimum.first + dir_path_len;
 
 			if (dir_path_len != max_int && minimum.first != max_int && alt_path_len < min_path_len[node.second]) {
-				min_path_len[node.second] = alt_path_len; 
+				min_path_len[node.second] = alt_path_len;
 			}
 		}
 
 		// Restauro la propiedad de heap
-		std::make_heap(not_added.begin(), not_added.end(), compare_pairs);	
+		std::make_heap(not_added.begin(), not_added.end(), compare_pairs);
 	}
 }
 
@@ -154,30 +154,5 @@ void DijkstraPQ(std::vector<std::vector<int>> &v, const Grafo &grafo) {
 
 	for (int i = 0; i < n; ++i) {
 		DijkstraPQAux(v[i], i, grafo);
-	}
-}
-
-
-void FloydWarshall(std::vector<std::vector<int>> &dist_matrix, const Grafo &grafo)
-{
-	int n = grafo.getCantVertices();
-	int max_int = std::numeric_limits<int>::max();
-
-	for (int i = 0; i < n; ++i) {
-		for (int j = 0; j < n; ++j) {
-			dist_matrix[i][j] = grafo.getCostoArista(i, j);
-		}
-	}
-
-	for (int k = 0; k < n; ++k) {
-		for (int i = 0; i < n; ++i) {
-			if (i != k && grafo.getCostoArista(i, k) != max_int) {
-				for (int j = 0; j < n; ++j) {
-					if (j != k && j != i && grafo.getCostoArista(k, j) != max_int) {
-						dist_matrix[i][j] = std::min(dist_matrix[i][j], dist_matrix[i][k]+dist_matrix[k][j]);
-					}
-				}
-			}
-		}	
 	}
 }
