@@ -22,6 +22,7 @@ int main(int argc, char* argv[]) {
     std::vector<int>& costos = p.obtenerCostos();
     int n = p.obtenerCiudades();
     std::unique_ptr<ShortestPath> algoritmo(ShortestPathFactory::crearAlgoritmo(argv[1]));
+    algoritmo->resolver(rutas, costos, n);
 
     return 0;
 }
