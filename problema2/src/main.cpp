@@ -22,7 +22,9 @@ int main(int argc, char* argv[]) {
     std::vector<int>& costos = p.obtenerCostos();
     int n = p.obtenerCiudades();
     std::unique_ptr<ShortestPath> algoritmo(ShortestPathFactory::crearAlgoritmo(argv[1]));
-    algoritmo->resolver(rutas, costos, n);
+
+    // aca falta usar la matriz de distancias para reportar los costos minimos
+    std::vector<std::vector<int>> distancias = algoritmo->resolver(rutas, costos, n);
 
     return 0;
 }
