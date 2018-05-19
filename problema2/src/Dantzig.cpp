@@ -19,8 +19,9 @@ Dantzig::~Dantzig() {
  */
 std::vector<std::vector<int>> Dantzig::resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n) {
     std::vector<std::vector<int>> L = this->armarGrafoEnNiveles(rutas, costos, n);
+    int N = n*61; // el tamaño de la matriz L es n*61, por los niveles
 
-    for (int k=1; k < n; ++k) {
+    for (int k=1; k < N; ++k) {
         for (int i=1; i <= k; i++) {
             for (int j=1; j <= k; i++) {
                 L[i][k+1] = std::min(L[i][j], L[j][k+1]);
