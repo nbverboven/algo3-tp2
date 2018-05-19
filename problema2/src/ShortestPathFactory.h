@@ -1,4 +1,5 @@
 #include "ShortestPath.h"
+#include <string>
 
 #ifndef SHORTEST_PATH_FACTORY
 #define SHORTEST_PATH_FACTORY
