@@ -16,8 +16,7 @@ ShortestPath::~ShortestPath() {
 
 /**
  * Metodo auxiliar para armar el grafo en niveles en base a las rutas existentes
- * y los costos de la nafta en cada ciudad. Modifica el vector recibido por
- * parametro para armar ahí la matriz de distancias.
+ * y los costos de la nafta en cada ciudad.
  */
 std::vector<std::vector<int>> ShortestPath::armarGrafoEnNiveles(std::vector<Ruta>& rutas,
     std::vector<int> costos,
@@ -27,6 +26,11 @@ std::vector<std::vector<int>> ShortestPath::armarGrafoEnNiveles(std::vector<Ruta
     // correspondientes a los 61 niveles
     std::vector<std::vector<int>> distancias(n*61, std::vector<int>(n*61, std::numeric_limits<int>::infinity()));
 
+
+    // pone ceros en las diagonales
+    for (int i = 0; i < n*61; ++i) {
+        distancias[i][i] = 0;
+    }
 
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < 60; ++j){
