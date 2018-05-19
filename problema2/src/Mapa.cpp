@@ -1,4 +1,4 @@
-#include "Grafo.h"
+#include "Mapa.h"
 
 Grafo::Grafo() : n(0), m(0){
 
@@ -49,7 +49,7 @@ Grafo* Grafo::getInstanceFromInput(){
 	Grafo *ret = new Grafo();
 	int a, b, c;
 	cin >> ret->n >> ret->m;
-	
+
 	ret->costoAristas.resize(ret->n);
 	ret->costoVertices.resize(ret->n);
 	ret->aristas.resize(ret->m);
@@ -62,13 +62,13 @@ Grafo* Grafo::getInstanceFromInput(){
 		//No existen las aristas que salgan y entren al mismo nodo
 		ret->costoAristas[i][i] = 0;
 	}
-	
+
 	//lleno los vertices
 	for(i=0; i < ret->n; i++){
 		cin >> c;
 		ret->costoVertices[i] = c;
 	}
-	
+
 	//lleno las aristas
 	for(i=0; i < ret->m; i++){
 		cin >> a >> b >> c;
