@@ -29,7 +29,6 @@ std::vector<std::vector<double>> Dijkstra::resolver(std::vector<Ruta>& rutas, st
 
     for(Edge& e: edges) {
         adjacencyList[e.getA()].push_back(std::make_tuple(e.getB(), e.getCost()));
-        adjacencyList[e.getB()].push_back(std::make_tuple(e.getA(), e.getCost()));
     }
 
     std::vector<std::vector<double>> distancias = this->armarGrafoEnNiveles(rutas, costos, n);
@@ -49,7 +48,7 @@ std::vector<std::vector<double>> Dijkstra::resolver(std::vector<Ruta>& rutas, st
 void Dijkstra::DijkstraAux(std::vector<double>& min_path_len,
     int vertex,
     std::vector<std::vector<double>>& distancias,
-    std::vector<std::vector<std::tuple<int, int>>> adjacencyList) {
+    std::vector<std::vector<std::tuple<int, int>>>& adjacencyList) {
 
     int max_int = std::numeric_limits<int>::max();
     int N = distancias.size();
