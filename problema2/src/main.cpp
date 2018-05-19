@@ -3,6 +3,7 @@
 #include <string>
 #include <memory>
 #include <chrono>
+#include <limits>
 
 #include "Parser.h"
 #include "ShortestPathFactory.h"
@@ -24,7 +25,20 @@ int main(int argc, char* argv[]) {
     std::unique_ptr<ShortestPath> algoritmo(ShortestPathFactory::crearAlgoritmo(argv[1]));
 
     // aca falta usar la matriz de distancias para reportar los costos minimos
-    std::vector<std::vector<int>> distancias = algoritmo->resolver(rutas, costos, n);
+    std::vector<std::vector<double>> distancias = algoritmo->resolver(rutas, costos, n);
+    for (int i = 0; i < n; ++i) {
+        // i:= identificador de ciudad
+        for (int j = i+1; j < n; ++j) {
+            // j:= identificador de la otra ciudad
+            double minimoCosto = std::numeric_limits<int>::max();
+            for (int nivel = 0; nivel < 61; ++nivel) {
+                double candidato = distancias[i*61][(j*61)+nivel];
+                minimoCosto = std::min(minimoCosto, candidato);
+            }
+            std::cout << i << " -> " << j << ": " << minimoCosto << std::endl;
+        }
+    }
+
 
     return 0;
 }
