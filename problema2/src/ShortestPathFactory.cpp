@@ -1,6 +1,8 @@
 #include "ShortestPathFactory.h"
 #include "Dantzig.h"
 #include "FloydWarshall.h"
+#include "Dijkstra.h"
+#include "DijkstraPQ.h"
 
 /**
  * Devuelve el algoritmo para resolver camino minimo
@@ -11,6 +13,10 @@ ShortestPath* ShortestPathFactory::crearAlgoritmo(std::string nombre) {
         return new Dantzig();
     } else if (nombre == "floydWarshall") {
         return new FloydWarshall();
+    } else if (nombre == "dijkstra") {
+        return new Dijkstra();
+    } else if (nombre == "dijkstra-pq") {
+        return new DijkstraPQ();
     }
     return NULL;
 }
