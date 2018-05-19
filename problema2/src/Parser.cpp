@@ -28,11 +28,11 @@ void Parser::parsearArgumentos() {
     }
 
     for (int i = 0; i < this->m_; ++i) {
-        int a_i, b_i, c_i;
+        int a_i, b_i, l_i;
         std::cin >> a_i;
         std::cin >> b_i;
-        std::cin >> c_i;
-        this->edges_.push_back(Edge(a_i, b_i, c_i));
+        std::cin >> l_i;
+        this->rutas_.push_back(Ruta(a_i, b_i, l_i));
     }
 }
 
@@ -46,8 +46,8 @@ int Parser::obtenerCiudades() {
 /**
  * Devuelve las rutas.
  */
-std::vector<Edge>& Parser::obtenerRutas() {
-    return this->edges_;
+std::vector<Ruta>& Parser::obtenerRutas() {
+    return this->rutas_;
 }
 
 /**

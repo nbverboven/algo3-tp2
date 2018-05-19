@@ -2,7 +2,7 @@
 #define PARSER_H_
 
 #include <vector>
-#include "Edge.h"
+#include "Ruta.h"
 
 /**
  * Clase para parsear los parametros del problema 2.
@@ -25,7 +25,7 @@ public:
     /**
      * Devuelve las rutas.
      */
-    std::vector<Edge>& obtenerRutas();
+    std::vector<Ruta>& obtenerRutas();
     /**
      * Devuelve la cantidad de ciudades.
      */
@@ -39,7 +39,7 @@ public:
 private:
     int n_, m_;
     std::vector<int> costs_;
-    std::vector<Edge> edges_;
+    std::vector<Edge> rutas_;
 };
 
 #endif
