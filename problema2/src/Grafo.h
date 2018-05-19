@@ -29,7 +29,7 @@ public:
 	int getCantAristas() const;
 	int getCostoVertice(int i) const;
 	int getCostoArista(int a, int b) const;
-	vector< tuple<int,int> > getAristas();
+	vector< tuple<int,int> > getAristas() const;
 	vector< vector< int > > getMatrizAdyacencia() const;
 
 	/**

@@ -7,7 +7,6 @@ Grafo::Grafo() : n(0), m(0){
 Grafo::Grafo(const std::vector<Edge> &edges, int cant_vertices) {
 	this->n = cant_vertices;
 	this->m = edges.size();
-
 	this->costoAristas.resize(this->n);
 
 	for (unsigned int i = 0; i < this->n; ++i) {
@@ -17,6 +16,7 @@ Grafo::Grafo(const std::vector<Edge> &edges, int cant_vertices) {
 
 	for (unsigned int i = 0; i < this->m; ++i) {
 		this->costoAristas[edges[i].getA()][edges[i].getB()] = edges[i].getCost();
+		this->aristas.push_back(std::make_tuple(edges[i].getA(), edges[i].getB()));
 	}
 }
 
@@ -36,11 +36,11 @@ int Grafo::getCostoArista(int a, int b) const {
 	return costoAristas[a][b];
 }
 
-vector< tuple<int,int> > Grafo::getAristas(){
+vector< tuple<int,int> > Grafo::getAristas() const {
 	return aristas;
 }
 
-vector< vector< int > > Grafo::getMatrizAdyacencia() const{
+vector< vector< int > > Grafo::getMatrizAdyacencia() const {
     return costoAristas;
 }
 
@@ -50,15 +50,15 @@ Grafo* Grafo::getInstanceFromInput(){
 	int a, b, c;
 	cin >> ret->n >> ret->m;
 	
-	ret->costoAristas.resize(ret->n+1);
-	ret->costoVertices.resize(ret->n+1);
+	ret->costoAristas.resize(ret->n);
+	ret->costoVertices.resize(ret->n);
 	ret->aristas.resize(ret->m);
 
 	int int_max = std::numeric_limits<int>::max();
 	unsigned int i;
-	for(i=0; i <= ret->n; i++){
+	for(i=0; i < ret->n; i++){
 		//Inicializo la matriz con el maximo valor representable (infinito)
-		ret->costoAristas[i].resize(ret->n+1, int_max);
+		ret->costoAristas[i].resize(ret->n, int_max);
 		//No existen las aristas que salgan y entren al mismo nodo
 		ret->costoAristas[i][i] = 0;
 	}
