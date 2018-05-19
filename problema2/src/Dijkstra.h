@@ -30,7 +30,7 @@ private:
     void DijkstraAux(std::vector<double>& min_path_len,
         int vertex,
         std::vector<std::vector<double>>& distancias,
-        std::vector<std::vector<std::tuple<int, int>>> adjacencyList);
+        std::vector<std::vector<std::tuple<int, int>>>& adjacencyList);
 };
 
 #endif
