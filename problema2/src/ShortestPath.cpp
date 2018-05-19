@@ -80,10 +80,11 @@ std::vector<Edge> ShortestPath::armarGrafoEnNivelesComoListaDeAristas(std::vecto
         int b_i = r.obtenerCiudadB();
         int litros = r.obtenerLitros();
         for (int nivel = 0; nivel < 61; ++nivel) {
-            if (nivel - litros > 0) {
+            if (nivel - litros >= 0) {
                 // agrega el costo del viaje entre dos ciudades, para
                 // el caso en que la nafta alcance
                 aristas.push_back(Edge((a_i*61)+nivel, (b_i*61)+nivel-litros, 0));
+                aristas.push_back(Edge((b_i*61)+nivel, (a_i*61)+nivel-litros, 0));
             }
         }
     }
