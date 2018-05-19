@@ -19,7 +19,7 @@ Dijkstra::~Dijkstra() {
  * Metodo polimorfico para resolver el problema
  * de camino minimo con Dijkstra.
  */
-std::vector<std::vector<int>> Dijkstra::resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n) {
+std::vector<std::vector<double>> Dijkstra::resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n) {
     std::vector<Edge> edges = this->armarGrafoEnNivelesComoListaDeAristas(rutas, costos, n);
     int N = n*61; // el tamaño de la matriz L es n*61, por los niveles
 
@@ -32,9 +32,9 @@ std::vector<std::vector<int>> Dijkstra::resolver(std::vector<Ruta>& rutas, std::
         adjacencyList[e.getB()].push_back(std::make_tuple(e.getA(), e.getCost()));
     }
 
-    std::vector<std::vector<int>> distancias = this->armarGrafoEnNiveles(rutas, costos, n);
+    std::vector<std::vector<double>> distancias = this->armarGrafoEnNiveles(rutas, costos, n);
 
-    std::vector<std::vector<int>> resultado(N, std::vector<int>(N, 0));
+    std::vector<std::vector<double>> resultado(N, std::vector<double>(N, 0));
     for (int i = 0; i < N; ++i) {
         DijkstraAux(resultado[i], i, distancias, adjacencyList);
     }
@@ -46,9 +46,9 @@ std::vector<std::vector<int>> Dijkstra::resolver(std::vector<Ruta>& rutas, std::
  * Funcion auxiliar que corre Dijsktra sobre un vertice. Se usa para
  * correr Dijkstra secuencialmente sobre todos los vertices del grafo.
  */
-void Dijkstra::DijkstraAux(std::vector<int>& min_path_len,
+void Dijkstra::DijkstraAux(std::vector<double>& min_path_len,
     int vertex,
-    std::vector<std::vector<int>>& distancias,
+    std::vector<std::vector<double>>& distancias,
     std::vector<std::vector<std::tuple<int, int>>> adjacencyList) {
 
     int max_int = std::numeric_limits<int>::max();

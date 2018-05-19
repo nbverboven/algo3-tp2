@@ -20,14 +20,14 @@ DijkstraPQ::~DijkstraPQ() {
  * Metodo polimorfico para resolver el problema
  * de camino minimo usando Dijkstra con priority queue.
  */
-std::vector<std::vector<int>> DijkstraPQ::resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n) {
+std::vector<std::vector<double>> DijkstraPQ::resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n) {
     int N = n*61;
 
     // Convierte la lista completa de aristas a una lista de adyacencias
     // de la forma a -> [<b, costo>]
     std::vector<Edge> edges = this->armarGrafoEnNivelesComoListaDeAristas(rutas, costos, n);
-    std::vector<std::vector<int>> distancias = this->armarGrafoEnNiveles(rutas, costos, n);
-    std::vector<std::vector<int>> resultado(N, std::vector<int>(N, 0));
+    std::vector<std::vector<double>> distancias = this->armarGrafoEnNiveles(rutas, costos, n);
+    std::vector<std::vector<double>> resultado(N, std::vector<double>(N, 0));
     for (int i = 0; i < N; ++i) {
         DijkstraPQAux(resultado[i], i, distancias);
     }
@@ -45,9 +45,9 @@ bool comparePairs(const std::pair<int,int> &a, const std::pair<int,int> &b) {
  * Funcion auxiliar que corre Dijsktra con priority queue sobre un vertice.
  * Se usa para correr Dijkstra secuencialmente sobre todos los vertices del grafo.
  */
-void DijkstraPQ::DijkstraPQAux(std::vector<int> &min_path_len,
+void DijkstraPQ::DijkstraPQAux(std::vector<double> &min_path_len,
     int vertex,
-    std::vector<std::vector<int>>& distancias) {
+    std::vector<std::vector<double>>& distancias) {
 
     int N = distancias.size();
     int max_int = std::numeric_limits<int>::max();

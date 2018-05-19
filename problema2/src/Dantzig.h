@@ -19,7 +19,7 @@ public:
     /**
      * Metodo para resolver camino minimo usando Dantzig.
      */
-    virtual std::vector<std::vector<int>> resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n);
+    virtual std::vector<std::vector<double>> resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n);
 
 };
 
