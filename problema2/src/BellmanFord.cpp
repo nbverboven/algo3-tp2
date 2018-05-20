@@ -60,8 +60,8 @@ void BellmanFord::BellmanFordAux(std::vector<double>& caminoMin, unsigned int ve
     caminoMin[vertice] = 0;
 
     std::vector<double> caminoMin_prim;
-
-    for(unsigned int i=0; i < N; i++){
+    //Utilizo el i por si existen ciclos negativos, sino no cortaria nunca
+    for(unsigned int i=0; i < N && caminoMin_prim != caminoMin; i++){
         caminoMin_prim = caminoMin;
 
         //Recorro todas las aristas
