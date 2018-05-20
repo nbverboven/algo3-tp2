@@ -50,49 +50,50 @@ void DijkstraPQ::DijkstraPQAux(std::vector<double> &min_path_len,
     std::vector<std::vector<double>>& distancias) {
 
     int N = distancias.size();
-    // int max_int = std::numeric_limits<int>::max();
+    int max_int = std::numeric_limits<int>::max();
 
-    // not_added es un vector de tuplas (a, b), donde
-    // (longitud del camino mínimo hasta un vértice, número de vértice)
-    std::vector<std::pair<double,int>> not_added;
+    // not_visited es un vector de tuplas (a, b), donde
+    // a: longitud del camino mínimo hasta un vértice
+    // b: número de dicho vértice
+    std::vector<std::pair<int,int>> not_visited;
 
     for (int i = 0; i < N; ++i) {
-        min_path_len[i] = distancias[vertex][i]; // graph.getCostoArista(vertex, i);
+        min_path_len[i] = distancias[vertex][i];
         if (i != vertex) {
-            not_added.push_back(std::make_pair(min_path_len[i], i));
+            not_visited.push_back(std::make_pair(min_path_len[i], i));
         }
     }
 
     // Convierto al vector de pares en un minHeap
     // El élemento más prioritario será aquel cuyo camino desde
     // vertex posea la menor longitud
-    std::make_heap(not_added.begin(), not_added.end(), comparePairs);
+    std::make_heap(not_visited.begin(), not_visited.end(), comparePairs);
 
-    while (!not_added.empty()) {
+    while (!not_visited.empty()) {
         // Busco la longitud del camino mínimo entre el
         // vértice original y uno que no haya sido agregado
         // a la solución
-        pop_heap(not_added.begin(), not_added.end());
-        std::pair<double,int> minimum = not_added.back();
-        not_added.pop_back();
+        pop_heap(not_visited.begin(), not_visited.end());
+        std::pair<int,int> minimum = not_visited.back();
+        not_visited.pop_back();
 
         int vertex_to_add = minimum.second;
+        min_path_len[vertex_to_add] = minimum.first;
 
         // Actualizo, si correspondiese, la longitud del
         // camino mínimo desde vertex hasta los sucesores
         // del vértice que agrego
-        for (std::pair<double,int> &node : not_added) {
-            double dir_path_len = distancias[vertex_to_add][node.second]; // graph.getCostoArista(vertex_to_add, node.second);
-            double alt_path_len = minimum.first + dir_path_len;
+        for (std::pair<int,int> &node : not_visited) {
+            int dir_path_len = distancias[vertex_to_add][node.second];
+            int alt_path_len = minimum.first + dir_path_len;
 
-            if (!std::isinf(dir_path_len) && !std::isinf(minimum.first) && (alt_path_len < min_path_len[node.second])) {
-                min_path_len[node.second] = alt_path_len;
+            if (dir_path_len != max_int && minimum.first != max_int && (alt_path_len < min_path_len[node.second])) {
                 node.first = alt_path_len;
             }
         }
 
         // Restauro la propiedad de heap
-        std::make_heap(not_added.begin(), not_added.end(), comparePairs);
+        std::make_heap(not_visited.begin(), not_visited.end(), comparePairs);
     }
 
 }
