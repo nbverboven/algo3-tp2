@@ -25,7 +25,7 @@ std::vector<std::vector<double>> DijkstraPQ::resolver(std::vector<Ruta>& rutas, 
 
     // Convierte la lista completa de aristas a una lista de adyacencias
     // de la forma a -> [<b, costo>]
-    std::vector<Edge> edges = this->armarGrafoEnNivelesComoListaDeAristas(rutas, costos, n);
+    // std::vector<Edge> edges = this->armarGrafoEnNivelesComoListaDeAristas(rutas, costos, n);
     std::vector<std::vector<double>> distancias = this->armarGrafoEnNiveles(rutas, costos, n);
     std::vector<std::vector<double>> resultado(N, std::vector<double>(N, 0));
     for (int i = 0; i < N; ++i) {
@@ -37,7 +37,7 @@ std::vector<std::vector<double>> DijkstraPQ::resolver(std::vector<Ruta>& rutas, 
 /**
  * Funcion auxiliar para comparar pares.
  */
-bool comparePairs(const std::pair<int,int> &a, const std::pair<int,int> &b) {
+bool comparePairs(const std::pair<double,int> &a, const std::pair<double,int> &b) {
     return a > b;
 }
 
@@ -50,11 +50,11 @@ void DijkstraPQ::DijkstraPQAux(std::vector<double> &min_path_len,
     std::vector<std::vector<double>>& distancias) {
 
     int N = distancias.size();
-    int max_int = std::numeric_limits<int>::max();
+    // int max_int = std::numeric_limits<int>::max();
 
     // not_added es un vector de tuplas (a, b), donde
     // (longitud del camino mínimo hasta un vértice, número de vértice)
-    std::vector<std::pair<int,int>> not_added;
+    std::vector<std::pair<double,int>> not_added;
 
     for (int i = 0; i < N; ++i) {
         min_path_len[i] = distancias[vertex][i]; // graph.getCostoArista(vertex, i);
@@ -73,7 +73,7 @@ void DijkstraPQ::DijkstraPQAux(std::vector<double> &min_path_len,
         // vértice original y uno que no haya sido agregado
         // a la solución
         pop_heap(not_added.begin(), not_added.end());
-        std::pair<int,int> minimum = not_added.back();
+        std::pair<double,int> minimum = not_added.back();
         not_added.pop_back();
 
         int vertex_to_add = minimum.second;
@@ -81,12 +81,13 @@ void DijkstraPQ::DijkstraPQAux(std::vector<double> &min_path_len,
         // Actualizo, si correspondiese, la longitud del
         // camino mínimo desde vertex hasta los sucesores
         // del vértice que agrego
-        for (std::pair<int,int> &node : not_added) {
-            int dir_path_len = distancias[vertex_to_add][node.second]; // graph.getCostoArista(vertex_to_add, node.second);
-            int alt_path_len = minimum.first + dir_path_len;
+        for (std::pair<double,int> &node : not_added) {
+            double dir_path_len = distancias[vertex_to_add][node.second]; // graph.getCostoArista(vertex_to_add, node.second);
+            double alt_path_len = minimum.first + dir_path_len;
 
-            if (dir_path_len != max_int && minimum.first != max_int && alt_path_len < min_path_len[node.second]) {
+            if (!std::isinf(dir_path_len) && !std::isinf(minimum.first) && (alt_path_len < min_path_len[node.second])) {
                 min_path_len[node.second] = alt_path_len;
+                node.first = alt_path_len;
             }
         }
 
