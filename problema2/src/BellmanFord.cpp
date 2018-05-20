@@ -37,7 +37,7 @@ std::vector<std::vector<double>> BellmanFord::resolver(std::vector<Ruta>& rutas,
  * correr Bellman-Ford secuencialmente sobre todos los vertices del grafo. 
  */
 void BellmanFord::BellmanFordAux(std::vector<double>& caminoMin, int vertice, 
-    std::vector<std::vector<double>>& distancias, std::vector<Edge> edges) {
+    std::vector<std::vector<double>>& distancias, const std::vector<Edge>& edges) {
 
     int N = distancias.size();
 
@@ -54,7 +54,7 @@ void BellmanFord::BellmanFordAux(std::vector<double>& caminoMin, int vertice,
     for(int i=0; i < N && caminoMin_prim != caminoMin; i++){
         caminoMin_prim = caminoMin;
 
-        for(Edge& e: edges) {
+        for(Edge e: edges) {
             int a = e.getB();
             if(a != vertice){
                 int b = e.getA();
