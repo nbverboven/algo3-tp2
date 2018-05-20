@@ -5,7 +5,6 @@
 
 class DijkstraPQ : public ShortestPath {
 public:
-
     /**
      * Constructor.
      */
@@ -22,7 +21,6 @@ public:
      * deben implementar este metodo.
      */
     virtual std::vector<std::vector<double>> resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n);
-    
 private:
 
     /**
