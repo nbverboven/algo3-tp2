@@ -23,7 +23,7 @@ public:
 
 private:
 
-    void BellmanFordAux(std::vector<double>& caminoMin, unsigned int vertex, std::vector<std::vector<double>>& distancias, std::vector<std::vector<std::tuple<int, int>>> adjacencyList);
+    void BellmanFordAux(std::vector<double>& caminoMin, int vertex, std::vector<std::vector<double>>& distancias, std::vector<Edge> edges);
 
 };
 
