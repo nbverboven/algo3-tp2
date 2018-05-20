@@ -78,6 +78,7 @@ void DijkstraPQ::DijkstraPQAux(std::vector<double> &min_path_len,
         not_visited.pop_back();
 
         int vertex_to_add = minimum.second;
+        min_path_len[vertex_to_add] = minimum.first;
 
         // Actualizo, si correspondiese, la longitud del
         // camino mínimo desde vertex hasta los sucesores
@@ -87,7 +88,6 @@ void DijkstraPQ::DijkstraPQAux(std::vector<double> &min_path_len,
             int alt_path_len = minimum.first + dir_path_len;
 
             if (dir_path_len != max_int && minimum.first != max_int && (alt_path_len < min_path_len[node.second])) {
-                min_path_len[vertex_to_add] = minimum.first;
                 node.first = alt_path_len;
             }
         }
