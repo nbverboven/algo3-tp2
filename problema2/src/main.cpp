@@ -16,15 +16,15 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    // obtiene los parametros del problema
     Parser p;
     p.parsearArgumentos();
-
     std::vector<Ruta>& rutas = p.obtenerRutas();
     std::vector<int>& costos = p.obtenerCostos();
     int n = p.obtenerCiudades();
     std::unique_ptr<ShortestPath> algoritmo(ShortestPathFactory::crearAlgoritmo(argv[1]));
 
-    // aca falta usar la matriz de distancias para reportar los costos minimos
+    // usa la matriz de distancias para reportar los costos minimos
     std::vector<std::vector<double>> distancias = algoritmo->resolver(rutas, costos, n);
     for (int i = 0; i < n; ++i) {
         // i:= identificador de ciudad
@@ -35,10 +35,9 @@ int main(int argc, char* argv[]) {
                 double candidato = distancias[i*61][(j*61)+nivel];
                 minimoCosto = std::min(minimoCosto, candidato);
             }
-            std::cout << i << " -> " << j << ": " << minimoCosto << std::endl;
+            std::cout << i << " " << j << " " << minimoCosto << std::endl;
         }
     }
-
 
     return 0;
 }
