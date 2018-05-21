@@ -4,6 +4,7 @@
 #include "Dijkstra.h"
 #include "DijkstraPQ.h"
 #include "BellmanFord.h"
+#include "AEstrella.h"
 
 /**
  * Devuelve el algoritmo para resolver camino minimo
@@ -20,6 +21,8 @@ ShortestPath* ShortestPathFactory::crearAlgoritmo(std::string nombre) {
         return new DijkstraPQ();
     } else if(nombre == "bellmanFord"){
         return new BellmanFord();
+    } else if(nombre == "aEstrella"){
+        return new AEstrella();
     }
     return NULL;
 }

@@ -24,7 +24,7 @@ public:
 
 private:
     void AEstrellaAux(std::vector<double>& caminoMin, std::vector<Ruta>& rutas, std::vector<int>& costos,
-                      int& subestimacion, int& vertex);
+                      double& subestimacion, int& vertex, int& n);
 
 };
 

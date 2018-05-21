@@ -1,5 +1,6 @@
 #include "AEstrella.h"
 #include <cmath>
+#include <set>
 
 /**
  * Constructor.
@@ -18,10 +19,10 @@ AEstrella::~AEstrella() {
 /**
  * Metodo para resolver camino minimo usando A*.
  */
-std::vector<std::vector<double>> resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n){
-    std::vector<std::vector<double>> resultado(n, std::vector<double>(n, 0));
+std::vector<std::vector<double>> AEstrella::resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n){
+    std::vector<std::vector<double>> resultado(n, std::vector<double>(n, std::numeric_limits<double>::max()));
 
-    int subestimacion_distancia = rutas[0].obtenerLitros();
+    double subestimacion_distancia = rutas[0].obtenerLitros();
     for(auto &r : rutas){
         if(r.obtenerLitros() < subestimacion_distancia)
             subestimacion_distancia = r.obtenerLitros();
@@ -29,7 +30,7 @@ std::vector<std::vector<double>> resolver(std::vector<Ruta>& rutas, std::vector<
 
     for(int vertex=0; vertex < n; ++vertex){
         AEstrellaAux(resultado[vertex], rutas, costos, subestimacion_distancia,
-                     inicio);
+                     vertex, n);
     }
 
     return  resultado;
@@ -39,14 +40,13 @@ std::vector<std::vector<double>> resolver(std::vector<Ruta>& rutas, std::vector<
  * Funcion auxiliar que corre A* sobre un vertice. Se usa para
  * correr A* secuencialmente sobre todos los vertices del grafo.
  */
-void AEstrellaAux(std::vector<double>& caminoMin, std::vector<Ruta>& rutas, std::vector<int>& costos,
-                  int& subestimacion, int& vertex){
+void AEstrella::AEstrellaAux(std::vector<double>& caminoMin, std::vector<Ruta>& rutas, std::vector<int>& costos,
+                  double& subestimacion, int& vertex, int& n){
 
-    std::set nodos_evaluados;
-    std::set nodos_no_evaluados;
+    std::set<int> nodos_evaluados;
+    std::set<int> nodos_no_evaluados;
     nodos_no_evaluados.insert(vertex);
 
-    caminoMin(n, std::numeric_limits<double>::max());
     caminoMin[vertex] = 0;
 
     int nodo_actual;
@@ -66,10 +66,10 @@ void AEstrellaAux(std::vector<double>& caminoMin, std::vector<Ruta>& rutas, std:
             int ciudadA = r.obtenerCiudadA();
             int ciudadB = r.obtenerCiudadB();
             if(ciudadA == nodo_actual){
-                if(!nodos_evaluados.find(ciudadB) and !nodos_no_evaluados.find(ciudadB)){
+                if(!nodos_evaluados.count(ciudadB) and !nodos_no_evaluados.count(ciudadB)){
                     nodos_no_evaluados.insert(ciudadB);
 
-                    distancia_temp = caminoMin[nodo_actual] + r.obtenerLitros;
+                    distancia_temp = caminoMin[nodo_actual] + r.obtenerLitros();
                     if(distancia_temp < caminoMin[ciudadB]){
                     caminoMin[ciudadB] = distancia_temp*costos[ciudadB]; //Costo de ir hasta la ciudad B
                     subestimacion_distancia[ciudadB] = caminoMin[ciudadB] + subestimacion; //Subestimacion de distancia hasta la ciudad B
