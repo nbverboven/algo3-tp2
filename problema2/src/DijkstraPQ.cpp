@@ -1,6 +1,7 @@
 #include "DijkstraPQ.h"
 #include <tuple>
 #include <algorithm>
+#include <cmath>
 
 /**
  * Constructor.
