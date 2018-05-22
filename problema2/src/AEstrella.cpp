@@ -20,6 +20,7 @@ AEstrella::~AEstrella() {
  * Metodo para resolver camino minimo usando A*.
  */
 std::vector<std::vector<double>> AEstrella::resolver(std::vector<Ruta>& rutas, std::vector<int> costos, int n){
+
     std::vector<std::vector<double>> resultado(n, std::vector<double>(n, std::numeric_limits<double>::max()));
 
     double subestimacion_distancia = rutas[0].obtenerLitros();
@@ -27,7 +28,7 @@ std::vector<std::vector<double>> AEstrella::resolver(std::vector<Ruta>& rutas, s
         if(r.obtenerLitros() < subestimacion_distancia)
             subestimacion_distancia = r.obtenerLitros();
     }
-
+    
     for(int vertex=0; vertex < n; ++vertex){
         AEstrellaAux(resultado[vertex], rutas, costos, subestimacion_distancia,
                      vertex, n);
@@ -54,7 +55,6 @@ void AEstrella::AEstrellaAux(std::vector<double>& caminoMin, std::vector<Ruta>& 
 
     std::vector<double> subestimacion_distancia(n, std::numeric_limits<double>::max());
     subestimacion_distancia[vertex] = subestimacion;
-
     while(!nodos_no_evaluados.empty()){
         //El nodo a evaluar será el de menor distancia subestimada hacia el nodo final, dentro de los nodos no evaluados
         nodo_actual = distance(subestimacion_distancia.begin(),
@@ -69,9 +69,9 @@ void AEstrella::AEstrellaAux(std::vector<double>& caminoMin, std::vector<Ruta>& 
                 if(!nodos_evaluados.count(ciudadB) and !nodos_no_evaluados.count(ciudadB)){
                     nodos_no_evaluados.insert(ciudadB);
 
-                    distancia_temp = caminoMin[nodo_actual] + r.obtenerLitros();
+                    distancia_temp = caminoMin[nodo_actual] + r.obtenerLitros()*costos[ciudadB];
                     if(distancia_temp < caminoMin[ciudadB]){
-                    caminoMin[ciudadB] = distancia_temp*costos[ciudadB]; //Costo de ir hasta la ciudad B
+                    caminoMin[ciudadB] = distancia_temp; //Costo de ir hasta la ciudad B
                     subestimacion_distancia[ciudadB] = caminoMin[ciudadB] + subestimacion; //Subestimacion de distancia hasta la ciudad B
                     }
                 }

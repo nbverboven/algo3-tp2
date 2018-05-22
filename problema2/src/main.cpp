@@ -12,7 +12,7 @@
 int main(int argc, char* argv[]) {
 
     if (argc != 2) {
-        std::cout << "uso: " << argv[0] << " dijkstra|dijkstra-pq|a|bellmanFord|floydWarshall|dantzig" << std::endl;
+        std::cout << "uso: " << argv[0] << " dijkstra|dijkstra-pq|a|bellmanFord|floydWarshall|dantzig|aEstrella" << std::endl;
         return 1;
     }
 
@@ -29,13 +29,17 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < n; ++i) {
         // i:= identificador de ciudad
         for (int j = i+1; j < n; ++j) {
-            // j:= identificador de la otra ciudad
-            double minimoCosto = std::numeric_limits<int>::max();
-            for (int nivel = 0; nivel < 61; ++nivel) {
-                double candidato = distancias[i*61][(j*61)+nivel];
-                minimoCosto = std::min(minimoCosto, candidato);
+            if(std::strcmp(argv[1], "aEstrella")) {
+                // j:= identificador de la otra ciudad
+                double minimoCosto = std::numeric_limits<int>::max();
+                for (int nivel = 0; nivel < 61; ++nivel) {
+                    double candidato = distancias[i * 61][(j * 61) + nivel];
+                    minimoCosto = std::min(minimoCosto, candidato);
+                }
+                std::cout << i << " " << j << " " << minimoCosto << std::endl;
+            } else {
+                std::cout << i << " " << j << " " << distancias[i][j] << std::endl;
             }
-            std::cout << i << " " << j << " " << minimoCosto << std::endl;
         }
     }
 
