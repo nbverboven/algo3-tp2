@@ -9,7 +9,7 @@ def main(n, m=None):
     # tenemos un teorema que asegura que m elegido asi hace que el grafo sea conexo
     if m is None:
         m = int((n-1)*(n-2)/2) + 1
-    aristas = [(i, j, int(random.uniform(1, 60))) for i in xrange(n) for j in xrange(n) if i < j]
+    aristas = [(i, j, 60) for i in xrange(n) for j in xrange(n) if i < j]
     grafo = random.sample(aristas, m)
     print '{} {}'.format(n, m)
     for costos in xrange(n):
