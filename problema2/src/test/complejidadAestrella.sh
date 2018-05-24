@@ -3,8 +3,8 @@
 OUTPUT_DIR=tiemposAestrella
 OUTPUT_FILE="$OUTPUT_DIR/tiemposN.csv"
 # estos parametros se pueden variar para mostrar distintos rangos de n
-MIN_N=30
-MAX_N=50
+MIN_N=10
+MAX_N=30
 TRIES_COUNT=5
 
 mkdir -p $OUTPUT_DIR
