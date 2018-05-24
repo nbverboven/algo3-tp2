@@ -28,7 +28,7 @@ std::vector<std::vector<double>> AEstrella::resolver(std::vector<Ruta>& rutas, s
         if(r.obtenerLitros() < subestimacion_distancia)
             subestimacion_distancia = r.obtenerLitros();
     }
-    
+
     for(int vertex=0; vertex < n; ++vertex){
         AEstrellaAux(resultado[vertex], rutas, costos, subestimacion_distancia,
                      vertex, n);
