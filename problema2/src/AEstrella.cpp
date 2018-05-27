@@ -1,6 +1,7 @@
 #include "AEstrella.h"
 #include <cmath>
 #include <set>
+#include <algorithm>
 
 /**
  * Constructor.

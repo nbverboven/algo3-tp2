@@ -4,6 +4,7 @@
 #include <memory>
 #include <chrono>
 #include <limits>
+#include <cstring>
 
 #include "Parser.h"
 #include "ShortestPathFactory.h"
