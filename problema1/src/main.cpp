@@ -6,7 +6,7 @@
 int main(int argc, char const *argv[]) {
 
     if (argc != 2) {
-        std::cout << "uso: " << argv[0] << " prim|kruskal|kruskal|kruskalCompression" << std::endl;
+        std::cout << "uso: " << argv[0] << " prim|kruskal|kruskalCompression" << std::endl;
         return 1;
     }
 

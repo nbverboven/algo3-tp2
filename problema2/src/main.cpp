@@ -13,7 +13,7 @@
 int main(int argc, char* argv[]) {
 
     if (argc != 2) {
-        std::cout << "uso: " << argv[0] << " dijkstra|dijkstra-pq|a|bellmanFord|floydWarshall|dantzig|aEstrella" << std::endl;
+        std::cout << "uso: " << argv[0] << " dijkstra|dijkstra-pq|bellmanFord|floydWarshall|dantzig|aEstrella" << std::endl;
         return 1;
     }
 
